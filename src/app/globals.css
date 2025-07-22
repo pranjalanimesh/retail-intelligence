@@ -112,6 +112,9 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+.animate-spin-slow { animation: spin 1.2s linear infinite; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
