@@ -62,34 +62,34 @@ export async function getStructuredDataFromGemini(transcript) {
         "audioAnalysis": {
           "backgroundMusic": { 
             "detected": boolean, 
-            "message": "descriptive message", 
+            "message": "3-4 words message", 
             "type": "good/info/warning" 
           },
           "multipleSpeakers": { 
             "detected": boolean, 
-            "message": "descriptive message", 
+            "message": "3-4 words message", 
             "type": "good/info/warning" 
           },
           "audioQuality": { 
             "clear": boolean, 
-            "message": "descriptive message", 
+            "message": "3-4 words message", 
             "type": "good/info/warning" 
           }
         },
         "staffPerformance": [
           {
             "category": "Product Knowledge",
-            "rating": number,
+            "rating": number of good points (1-5),
             "rationale": "\\nGoods:\\n- [0-5 goods]\\nBads:\\n- [exactly 5-(number of goods) bads, totaling 5 points]"
           },
           {
             "category": "Relationship Building", 
-            "rating": number,
+            "rating": number of good points (1-5),
             "rationale": "\\nGoods:\\n- [0-5 goods]\\nBads:\\n- [exactly 5-(number of goods) bads, totaling 5 points]"
           },
           {
             "category": "Selling Skills",
-            "rating": number, 
+            "rating": number of good points (1-5),  
             "rationale": "\\nGoods:\\n- [0-5 goods]\\nBads:\\n- [exactly 5-(number of goods) bads, totaling 5 points]"
           }
         ],
