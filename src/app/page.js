@@ -6,7 +6,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../com
 import { Progress } from "../components/ui/progress";
 import { FaUpload } from "react-icons/fa";
 
-const AUDIO_TYPES = ["audio/mpeg", "audio/wav", "audio/mp3"];
+const AUDIO_TYPES = ["audio/mpeg", "audio/wav", "audio/mp3", "audio/mp4", "audio/x-m4a"];
 
 export default function Home() {
   const [file, setFile] = useState(null);
@@ -105,7 +105,7 @@ export default function Home() {
               >
                 <input
                   type="file"
-                  accept=".mp3,.wav"
+                  accept=".mp3,.wav,.m4a"
                   ref={inputRef}
                   className="hidden"
                   onChange={handleChange}
@@ -115,7 +115,7 @@ export default function Home() {
                   style={{ minHeight: 32 }}
                 />
                 <span className="text-lg font-semibold mb-2">Upload an audio file</span>
-                <span className="text-gray-500 mb-4 text-center">Drag & drop or click to select a .mp3 or .wav file</span>
+                <span className="text-gray-500 mb-4 text-center">Drag & drop or click to select a .mp3, .wav, or .m4a file</span>
                 <div style={{ minHeight: 24, width: "100%" }}>
                   {file && <div className="mb-2 text-blue-600">Selected: {file.name}</div>}
                   {error && <div className="text-red-500 mb-2">{error}</div>}
@@ -243,13 +243,14 @@ export default function Home() {
                 <div className="text-center mt-10 p-6 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-500 text-white shadow-lg">
                   <div className="text-xl font-semibold mb-2">Overall Performance</div>
                   <div className="text-4xl font-bold mb-2">
-                    {(() => {
-                      const staff = result.staffPerformance;
-                      const avg = staff.reduce((sum, s) => sum + (s.rating || 0), 0) / staff.length;
-                      return avg.toFixed(1) + "/5";
-                    })()}
+                    {result.overallPerformance?.score
+                      ? `${result.overallPerformance.score}/5`
+                      : "N/A"}
                   </div>
-                  <div className="text-base">Above Average Performance - Strong foundation with room for growth</div>
+                  <div className="text-base">
+                    {result.overallPerformance?.summary ||
+                      "No summary available."}
+                  </div>
                 </div>
               )}
             </div>

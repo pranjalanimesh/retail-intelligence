@@ -81,6 +81,10 @@ Bads:
 - Sometimes forgets to mention promotions`
         },
       ],
+      overallPerformance: {
+        score: 4.0,
+        summary: "Above Average Performance - Strong foundation with room for growth"
+      },
       customerInsights: [
         {
           title: "What they liked",
@@ -118,4 +122,4 @@ Bads:
 
   // 3. Return structured data to frontend
   return NextResponse.json(structuredData);
-} 
+}
