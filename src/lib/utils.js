@@ -6,6 +6,7 @@ export function cn(...inputs) {
 }
 
 import { GoogleGenAI } from "@google/genai";
+import { howtodosales } from "../prompts/retailPrompt";
 
 // Initialize Gemini AI (API key is picked up from GEMINI_API_KEY env variable)
 const ai = new GoogleGenAI({
@@ -45,14 +46,23 @@ export async function getTranscriptFromGemini(audioBuffer, mimeType = "audio/wav
 export async function getStructuredDataFromGemini(transcript) {
   try {
     const prompt = `
-      Analyze this customer service conversation transcript and provide structured insights in the following exact JSON format.
+      Analyze this customer service conversation transcript and provide structured insights in the following exact JSON format. 
 
-      IMPORTANT REQUIREMENTS:
+      Your task is to objectively analyze the audio and return the following output in a structured format, based on best practices and training guidelines from the attached sales guide:
+      ${howtodosales}
+
+
+
+      Important Notes for Output Consistency:
       1. For each staff performance category, provide exactly 5 total points (goods + bads combined)
       2. Each good/bad should be a concise bullet point (1-2 lines max)
       3. Rate each category from 1-5 based on performance
       4. Audio analysis should identify background music, multiple speakers, and audio quality
       5. Customer insights should be specific and actionable
+      6. Be as objective and repeatable as possible; assume the same audio will return the same insights each time.
+      7. Stick to factual observations, not assumptions.
+      8. Refer to phrases, behavior, or tone that violate or match SOPs in the sales guide (e.g., whether they offered trial room assistance, explained offers, built rapport, etc.)
+      9. Keep the tone supportive and professional. The goal is to train and improve performance, not penalize.
 
       Transcript: ${transcript}
 
@@ -99,17 +109,17 @@ export async function getStructuredDataFromGemini(transcript) {
         },
         "customerInsights": [
           {
-            "title": "What they liked",
+            "title": "What did they like about the experience/products",
             "summary": "brief summary - 1 liner",
             "detail": "detailed explanation in 2 sentences"
           },
           {
-            "title": "What they didn't like", 
+            "title": "What did they not like or were dissatisfied with", 
             "summary": "brief summary - 1 liner",
             "detail": "detailed explanation in 2 sentences"
           },
           {
-            "title": "What they want more of",
+            "title": "What were they asking for or expecting but didn't receive",
             "summary": "brief summary - 1 liner",
             "detail": "detailed explanation in 2 sentences"
           }
