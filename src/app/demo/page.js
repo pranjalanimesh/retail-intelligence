@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Progress } from "@/components/ui/progress";
 import { FaUpload } from "react-icons/fa";
+import Image from "next/image";
 
 const AUDIO_TYPES = ["audio/mpeg", "audio/wav", "audio/mp3", "audio/mp4", "audio/x-m4a"];
 
@@ -83,10 +84,16 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
       {/* Navbar */}
-      <nav className="w-full bg-white shadow-sm py-4">
-        <div className="max-w-4xl mx-auto flex items-center justify-between px-4">
-          <div className="text-xl font-bold tracking-tight text-blue-700">Retail Intelligence</div>
-          <div className="text-gray-500 text-sm">v1.0</div>
+      <nav className="w-full bg-gradient-to-r from-blue-500 to-purple-600 shadow-sm py-2">
+        <div className="max-w-4xl mx-auto flex items-center justify-between px-4 ">
+            <Image
+            src="/long-spulse.png"      // path is *from* /public
+            alt="Logo Spulse"
+            width={120}               // intrinsic size, required unless using `fill`
+            height={50}
+            priority
+          />
+          <div className="text-gray-200 text-sm">v1.0</div>
         </div>
       </nav>
 
