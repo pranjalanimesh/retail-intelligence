@@ -45,11 +45,12 @@ export default function Home() {
     setProgress(10);
     // Simulate upload progress
     const interval = setInterval(() => {
-      setProgress((p) => (p < 80 ? p + 10 : p));
-    }, 150);
+      setProgress((p) => (p < 90 ? p + 1 : p));
+    }, 600);
     // Actually call the API
     const formData = new FormData();
     formData.append("file", file);
+    setResult(null); // Reset result before upload
     try {
       const res = await fetch("/api/process-audio", {
         method: "POST",
@@ -308,13 +309,13 @@ export default function Home() {
                               {icons[idx]}
                               {insight.title}
                             </div>
-                            <div className="text-gray-700 text-sm min-h-[32px] mb-4">{insight.summary || <span className="opacity-50">—</span>}</div>
-                            <div className="w-full h-2 bg-gray-200 rounded mt-2 mb-2 overflow-hidden">
+                            <div className="text-gray-700 text-sm min-h-[32px] mb-1">{insight.summary || <span className="opacity-50">—</span>}</div>
+                            {/* <div className="w-full h-2 bg-gray-200 rounded mt-2 mb-2 overflow-hidden">
                               <div
                                 className={`h-full rounded transition-all duration-700 ${progressColors[idx]}`}
                                 style={{ width: `${progress}%` }}
                               />
-                            </div>
+                            </div> */}
                           </div>
                         </TooltipTrigger>
                         {insight.detail && (
